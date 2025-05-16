@@ -1,13 +1,50 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Opina+</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header>
+    <h1>Opina+ - Reclamações e Sugestões</h1>
+  </header>
+
+  <main class="container">
+    <!-- Coluna esquerda: formulário -->
+    <section class="formulario">
+      <h2>Envie sua opinião</h2>
+      <form id="form-opiniao">
+        <label for="tipo">Tipo:</label>
+        <select id="tipo" name="tipo">
+          <option value="reclamação">Reclamação</option>
+          <option value="sugestão">Sugestão</option>
+        </select>
+
+        <label for="descricao">Descrição:</label>
+        <textarea id="descricao" name="descricao" rows="5" placeholder="Digite aqui..."></textarea>
+
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+
+    <!-- Coluna direita: lista -->
+    <section class="lista">
+      <h2>Registros</h2>
+      <ul id="registros">
+        <li class="vazio">Nenhuma opinião enviada ainda.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Opina+. Todos os direitos reservados.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
 </html>

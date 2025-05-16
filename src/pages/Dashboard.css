@@ -1,0 +1,16 @@
+.dashboard {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.form-area {
+  flex: 1;
+}
+
+.lista-area {
+  flex: 2;
+  background: #fafafa;
+  padding: 20px;
+  border-radius: 8px;
+}

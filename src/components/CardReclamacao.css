@@ -1,0 +1,13 @@
+.card {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.card .data {
+  font-size: 12px;
+  color: #777;
+}

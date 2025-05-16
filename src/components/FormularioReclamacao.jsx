@@ -1,41 +1,79 @@
-import { useState } from 'react'
+import React, { useState } from 'react';
+import './FormularioReclamacao.css';
 
-export default function FormularioReclamacao({ onNovaReclamacao }) {
-  const [tipo, setTipo] = useState('reclamacao')
-  const [descricao, setDescricao] = useState('')
+const FormularioReclamacao = () => {
+  const [tipo, setTipo] = useState('Reclamação');
+  const [descricao, setDescricao] = useState('');
+  const [imagem, setImagem] = useState(null);
+  const [preview, setPreview] = useState(null);
 
-  function handleSubmit(e) {
-    e.preventDefault()
-    if (descricao.trim() === '') {
-      alert('Por favor, escreva a descrição.')
-      return
+  const handleImagemChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImagem(file);
+      setPreview(URL.createObjectURL(file));
     }
-    onNovaReclamacao({ tipo, descricao, data: new Date().toLocaleDateString() })
-    setDescricao('')
-  }
+  };
+
+  const handleRemoverImagem = () => {
+    setImagem(null);
+    setPreview(null);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('tipo', tipo);
+    formData.append('descricao', descricao);
+    if (imagem) {
+      formData.append('imagem', imagem);
+    }
+
+    console.log('Enviando:', {
+      tipo,
+      descricao,
+      imagem
+    });
+
+    // Aqui você pode enviar para o backend com fetch
+    // fetch('/api/reclamacoes', { method: 'POST', body: formData })
+
+    alert('Enviado!');
+    setDescricao('');
+    handleRemoverImagem();
+  };
 
   return (
     <form className="formulario" onSubmit={handleSubmit}>
-      <label>
-        Tipo:
-        <select value={tipo} onChange={e => setTipo(e.target.value)} className="input">
-          <option value="reclamacao">Reclamação</option>
-          <option value="sugestao">Sugestão</option>
-        </select>
-      </label>
+      <label>Tipo:</label>
+      <select value={tipo} onChange={(e) => setTipo(e.target.value)}>
+        <option>Reclamação</option>
+        <option>Sugestão</option>
+      </select>
 
-      <label>
-        Descrição:
-        <textarea
-          value={descricao}
-          onChange={e => setDescricao(e.target.value)}
-          rows={4}
-          placeholder="Digite aqui sua reclamação ou sugestão"
-          className="input"
-        />
-      </label>
+      <label>Descrição:</label>
+      <textarea
+        rows="4"
+        value={descricao}
+        onChange={(e) => setDescricao(e.target.value)}
+        placeholder="Digite aqui sua reclamação ou sugestão"
+      />
 
-      <button type="submit" className="botao">Enviar</button>
+      <label>Imagem (opcional):</label>
+      <input type="file" accept="image/*" onChange={handleImagemChange} />
+
+      {preview && (
+        <>
+          <img src={preview} alt="Preview" className="imagem-preview" />
+          <button type="button" onClick={handleRemoverImagem} className="btn-remover">
+            Remover imagem
+          </button>
+        </>
+      )}
+
+      <button type="submit">Enviar</button>
     </form>
-  )
-}
+  );
+};
+
+export default FormularioReclamacao;
