@@ -1,92 +1,247 @@
-/* Estilos globais da Home */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f8fb;
-  margin: 0;
-  padding: 0;
+/* src/pages/Home.css */
+
+.home-container {
+  font-family: 'Arial', sans-serif;
+  color: #343a40;
+  text-align: center;
+  background-color: #f8f9fa;
+  /* Cor de fundo suave */
 }
 
-/* Cabeçalho */
-header {
-  background-color: #002c4b;
+/* Hero Section (Banner de Boas-Vindas) */
+.hero-section {
+  /* Mude 'imagem_pessoas_opina_plus.jpeg' para o NOME REAL do seu arquivo de imagem na pasta 'public' */
+  background: url('/public/Atendimento-ao-cliente.jpg') no-repeat center center/cover;
   color: white;
-  padding: 2rem;
-  text-align: center;
-}
-
-header h1 {
-  margin: 0;
-  font-size: 2.5rem;
-}
-
-header p {
-  font-size: 1.2rem;
-  margin-top: 0.5rem;
-}
-
-/* Container principal */
-.container {
-  max-width: 1000px;
-  margin: 2rem auto;
-  padding: 1rem;
-  text-align: center;
-}
-
-/* Imagem em destaque */
-.image-banner {
-  width: 100%;
-  max-height: 400px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 2rem;
-}
-
-/* Seção de funcionalidades */
-.features {
+  padding: 100px 20px;
+  position: relative;
   display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
   justify-content: center;
-  margin-bottom: 2rem;
+  align-items: center;
+  min-height: 500px;
+  /* Altura mínima para o banner */
 }
 
-.feature {
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Overlay escuro */
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+}
+
+.hero-content h1 {
+  font-size: 3.5em;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.hero-content .slogan {
+  font-size: 1.5em;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  /* Para responsividade */
+}
+
+.btn-cta {
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  /* Evita quebra de linha no botão */
+}
+
+.btn-cta.primary {
+  background-color: #28a745;
+  /* Verde para clientes */
+  color: white;
+  border: 2px solid #28a745;
+}
+
+.btn-cta.primary:hover {
+  background-color: #218838;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-cta.secondary {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.btn-cta.secondary:hover {
   background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 1.5rem;
-  width: 280px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease;
+  color: #003366;
+  /* Cor do cabeçalho */
+  transform: translateY(-3px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-.feature:hover {
+/* Benefits Section */
+.benefits-section {
+  padding: 60px 20px;
+  background-color: white;
+}
+
+.benefits-section h2 {
+  color: #003366;
+  font-size: 2.2em;
+  margin-bottom: 50px;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.benefit-card {
+  background-color: #f0f8ff;
+  /* Azul claro */
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.benefit-card:hover {
   transform: translateY(-5px);
 }
 
-.feature i {
-  font-size: 2rem;
-  color: #005ba3;
-  margin-bottom: 1rem;
+.benefit-icon {
+  font-size: 3em;
+  color: #007bff;
+  margin-bottom: 15px;
 }
 
-/* Botões de chamada para ação */
-.cta-buttons {
-  margin-top: 2rem;
+.benefit-card h3 {
+  font-size: 1.5em;
+  color: #003366;
+  margin-bottom: 10px;
 }
 
-.btn {
-  display: inline-block;
-  margin: 0 1rem;
-  padding: 0.8rem 2rem;
-  background-color: #005ba3;
-  color: white;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
+.benefit-card p {
+  font-size: 1em;
+  color: #555;
+  line-height: 1.5;
 }
 
-.btn:hover {
-  background-color: #003f73;
+/* CTA Bottom Section */
+.cta-bottom-section {
+  padding: 60px 20px;
+  background-color: #e6f0ff;
+  /* Outro tom de azul claro */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.cta-card {
+  background-color: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  max-width: 450px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* Para que os botões fiquem na parte inferior */
+}
+
+.cta-card h3 {
+  font-size: 1.8em;
+  color: #003366;
+  margin-bottom: 15px;
+}
+
+.cta-card p {
+  font-size: 1.1em;
+  color: #555;
+  margin-bottom: 30px;
+  flex-grow: 1;
+  /* Faz o parágrafo ocupar o espaço restante */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2.5em;
+  }
+
+  .hero-content .slogan {
+    font-size: 1.2em;
+  }
+
+  .btn-cta {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .benefits-grid {
+    grid-template-columns: 1fr;
+    /* Uma coluna em telas menores */
+  }
+
+  .cta-bottom-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cta-card {
+    width: 100%;
+    max-width: 450px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    padding: 60px 15px;
+    min-height: 400px;
+  }
+
+  .hero-content h1 {
+    font-size: 2em;
+  }
+
+  .hero-content .slogan {
+    font-size: 1em;
+  }
+
+  .benefits-section,
+  .cta-bottom-section {
+    padding: 40px 15px;
+  }
+
+  .benefit-card,
+  .cta-card {
+    padding: 25px;
+  }
 }

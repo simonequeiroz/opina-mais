@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import './Cadastro.css'
+// Linha CORRIGIDA: Agora ele procura por 'Cadastro.css' no MESMO DIRETÓRIO
+import './Cadastro.css' 
 
 function Cadastro() {
   const [form, setForm] = useState({
@@ -28,70 +29,100 @@ function Cadastro() {
     e.preventDefault()
     if (!validar()) return
 
-    // Exemplo de integração com backend usando fetch
-    fetch('https://seu-backend.com/api/cadastro', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form)
-    })
-      .then(res => res.ok ? res.json() : Promise.reject(res))
-      .then(data => {
-        console.log(data)
-        setSucesso(true)
-        setForm({ nome: '', email: '', senha: '' })
-      })
-      .catch(error => {
-        console.error('Erro no cadastro:', error)
-        setSucesso(false)
-      })
+    // --- LÓGICA DE SIMULAÇÃO DE CADASTRO (PARA DESENVOLVIMENTO) ---
+    // REMOVA OU SUBSTITUA POR CÓDIGO DO BACKEND QUANDO ESTIVER PRONTO!
+    try {
+      // Simula um atraso de rede
+      setTimeout(() => {
+        console.log('Cadastro simulado com sucesso para:', form);
+        setSucesso(true);
+        setErros({});
+        setForm({ nome: '', email: '', senha: '' }); // Limpa o formulário
+      }, 1000); // Simula 1 segundo de espera
+    } catch (error) {
+      console.error('Erro na simulação de cadastro:', error);
+      setErros({ geral: 'Ocorreu um erro ao tentar cadastrar. Tente novamente.' });
+      setSucesso(false);
+    }
+    // --- FIM DA LÓGICA DE SIMULAÇÃO ---
+
+    /*
+    // CÓDIGO ORIGINAL PARA INTEGRAR COM BACKEND (DESCOMENTAR QUANDO PRONTO)
+    // fetch('https://seu-backend.com/api/cadastro', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(form)
+    // })
+    //   .then(res => res.ok ? res.json() : Promise.reject(res))
+    //   .then(data => {
+    //     console.log(data)
+    //     setSucesso(true)
+    //     setErros({}) // Limpa erros de validação
+    //     setForm({ nome: '', email: '', senha: '' })
+    //   })
+    //   .catch(error => {
+    //     console.error('Erro no cadastro:', error)
+    //     // Tentar ler a mensagem de erro do backend se disponível
+    //     error.json().then(errData => {
+    //         setErros({ geral: errData.message || 'Erro ao realizar cadastro.' });
+    //     }).catch(() => {
+    //         setErros({ geral: 'Erro ao realizar cadastro. Tente novamente.' });
+    //     });
+    //     setSucesso(false)
+    //   })
+    */
   }
 
   return (
     <div className="cadastro-container">
       <h2>📝 Cadastro de Usuário</h2>
 
-      {sucesso && <p className="sucesso">Cadastro realizado com sucesso! ✅</p>}
+      {sucesso && <p className="mensagem sucesso">Cadastro realizado com sucesso! ✅</p>}
+      {erros.geral && <p className="mensagem erro">{erros.geral}</p>} {/* Mensagem de erro geral */}
 
       <form onSubmit={handleSubmit}>
-        <label>Nome:</label>
+        <label htmlFor="nome">Nome:</label>
         <input
+          id="nome"
           type="text"
           name="nome"
           value={form.nome}
           onChange={handleChange}
-          className={erros.nome ? 'erro' : ''}
+          className={erros.nome ? 'input-erro' : ''}
           placeholder="Digite seu nome"
         />
-        {erros.nome && <span className="mensagem-erro">{erros.nome}</span>}
+        {erros.nome && <span className="erro-texto">{erros.nome}</span>}
 
-        <label>Email:</label>
+        <label htmlFor="email">Email:</label>
         <input
+          id="email"
           type="email"
           name="email"
           value={form.email}
           onChange={handleChange}
-          className={erros.email ? 'erro' : ''}
+          className={erros.email ? 'input-erro' : ''}
           placeholder="exemplo@email.com"
         />
-        {erros.email && <span className="mensagem-erro">{erros.email}</span>}
+        {erros.email && <span className="erro-texto">{erros.email}</span>}
 
-        <label>Senha:</label>
+        <label htmlFor="senha">Senha:</label>
         <div className="senha-container">
           <input
+            id="senha"
             type={mostrarSenha ? 'text' : 'password'}
             name="senha"
             value={form.senha}
             onChange={handleChange}
-            className={erros.senha ? 'erro' : ''}
+            className={erros.senha ? 'input-erro' : ''}
             placeholder="Mínimo 6 caracteres"
           />
-          <button type="button" className="mostrar" onClick={() => setMostrarSenha(!mostrarSenha)}>
+          <button type="button" className="mostrar-senha-btn" onClick={() => setMostrarSenha(!mostrarSenha)}>
             {mostrarSenha ? '🙈' : '👁️'}
           </button>
         </div>
-        {erros.senha && <span className="mensagem-erro">{erros.senha}</span>}
+        {erros.senha && <span className="erro-texto">{erros.senha}</span>}
 
-        <button type="submit" className="btn">Cadastrar</button>
+        <button type="submit" className="btn-cadastrar">Cadastrar</button> {/* Renomeei a classe para especificidade */}
       </form>
     </div>
   )
